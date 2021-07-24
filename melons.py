@@ -31,7 +31,22 @@ class AbstractMelon():
         """Record the fact than an order has been shipped."""
 
         self.shipped = True
+
+
+class GovernmentMelonOrder(AbstractMelon):
+    """A melon order for the white house (or other prts of the US Gov)"""
+
+    def __init__(self, species, qty):
+        """Initialize melon order attributes."""
+
+        super().__init__(species, qty, "government", 0)
+        self.passed_inspection = False
     
+    def mark_inspection(self):
+        """Record the fact than an order has been shipped."""
+        
+        self.passed_inspection = True
+
 
 class DomesticMelonOrder(AbstractMelon):
     """A melon order within the USA."""
@@ -39,8 +54,6 @@ class DomesticMelonOrder(AbstractMelon):
     def __init__(self, species, qty):
         """Initialize melon order attributes."""
 
-        self.order_type = "domestic"
-        self.tax = 0.08
         super().__init__(species, qty, 'domestic', 0.08)
 
 
@@ -50,8 +63,6 @@ class InternationalMelonOrder(AbstractMelon):
     def __init__(self, species, qty, country_code):
         """Initialize melon order attributes."""
 
-        self.order_type = "international"
-        self.tax = 0.17
         super().__init__(species, qty, 'international', 0.17) 
         self.country_code = country_code
 
